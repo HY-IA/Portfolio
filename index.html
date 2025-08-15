@@ -1,119 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Projects</title>
+  <title>Hiromichi Yano — Portfolio</title>
+  <meta name="description" content="Hiromichi Yano — Software Engineer focused on web applications and machine learning." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f5f5;
-      color: #333;
+    :root{
+      --bg:#0f1116; --panel:#141823; --soft:#1b2030; --ink:#e9ecf1; --muted:#a6aec3;
+      --brand:#7a7dff; --brand-2:#ff7ad9; --chip:#1f2435; --card-ring:rgba(255,255,255,.08);
+      --shadow:0 16px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+      --radius:18px; --radius-lg:24px;
     }
-    header {
-      background: #222;
-      color: #fff;
-      padding: 3rem 1rem;
-      text-align: center;
+    [data-theme="light"]{
+      --bg:#f7f8fc; --panel:#fff; --soft:#eff1f7; --ink:#0f1116; --muted:#5e6475; --chip:#eef0f6;
+      --card-ring:rgba(16,17,22,.08); --shadow:0 16px 36px rgba(16,17,22,.10);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.75rem;
-    }
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-      gap: 2rem;
-    }
-    .project {
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .project img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .project-content {
-      padding: 1rem 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-content h2 {
-      margin: 0 0 0.5rem;
-      font-size: 1.5rem;
-    }
-    .project-content p {
-      flex: 1;
-      margin: 0 0 1rem;
-      line-height: 1.4;
-    }
-    .project-content a {
-      align-self: flex-start;
-      padding: 0.6rem 1.2rem;
-      background: #0077cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: background .15s;
-    }
-    .project-content a:hover {
-      background: #005fa3;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #777;
-      font-size: 0.9rem;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1160px;margin:0 auto;padding:24px}
+    .bg-radial{position:fixed;inset:-20vh -10vw auto auto;z-index:-1;width:65vw;height:65vw;border-radius:50%;
+      background:radial-gradient(circle at 30% 40%, rgba(122,125,255,.32), transparent 55%),
+                 radial-gradient(circle at 75% 60%, rgba(255,122,217,.26), transparent 60%);
+      filter:blur(40px);opacity:.55;pointer-events:none;}
+    header{position:sticky;top:0;z-index:6;background:rgba(15,17,22,.55);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--card-ring)}
+    [data-theme="light"] header{background:rgba(255,255,255,.75)}
+    .nav-row{display:flex;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}
+    .dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-weight:800}
+    nav{margin-left:auto;display:flex;gap:18px;font-weight:700}
+    nav a{position:relative;padding:10px 6px;border-radius:10px}
+    nav a::after{content:"";position:absolute;left:10px;right:10px;bottom:6px;height:2px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:0 50%;transition:transform .28s ease}
+    nav a:hover::after{transform:scaleX(1)}
+    .social{display:flex;gap:12px;margin-left:8px}.social a{opacity:.9}.social a:hover{opacity:1}
+    .toggle{margin-left:8px;border:1px solid var(--card-ring);background:var(--panel);color:inherit;
+      padding:8px 10px;border-radius:12px;font-weight:700;cursor:pointer}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;padding-top:34px;padding-bottom:8px}
+    .eyebrow{font-weight:800;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-size:12px}
+    .hero h1{font-size:58px;line-height:1.05;letter-spacing:-.02em;margin:6px 0 16px}
+    .hero p{color:var(--muted);font-size:18px;margin:0 0 18px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:12px 16px;border-radius:14px;font-weight:800;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;border:0;transform:translateY(0);
+      box-shadow:0 10px 24px rgba(122,125,255,.25);transition:transform .15s ease, box-shadow .2s ease, filter .2s ease}
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.1);box-shadow:0 16px 26px rgba(122,125,255,.35)}
+    .btn.secondary{background:transparent;color:var(--ink);border:1.8px solid var(--card-ring);box-shadow:none}
+    .hero-card{position:relative;border-radius:var(--radius-lg);background:var(--panel);overflow:hidden;border:1px solid var(--card-ring);
+      box-shadow:var(--shadow);aspect-ratio:4/3;transition:transform .12s ease-out}
+    .hero-card img{width:100%;height:100%;object-fit:cover;object-position:center 36%}
+    .initials{position:absolute;top:10px;left:10px;width:36px;height:36px;border-radius:50%;background:#0f1116;color:#fff;
+      display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.06em;opacity:.85}
+    .section-title{font-size:42px;letter-spacing:-.02em;margin:22px 0 4px}
+    .subtle{color:var(--muted)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .cardish{background:linear-gradient(180deg,var(--panel),var(--soft));border:1px solid var(--card-ring);
+      border-radius:var(--radius);padding:20px 20px 18px;box-shadow:var(--shadow)}
+    .cardish p{line-height:1.68}
+    .skills h4{margin:0 0 8px}.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .skills-group{margin:10px 0 6px}.skills-group h5{margin:0 0 6px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:var(--chip);padding:8px 12px;border-radius:999px;font-weight:700;font-size:12.5px;border:1px solid var(--card-ring);
+      transition:transform .12s ease, background .2s ease}
+    .chip:hover{transform:translateY(-1px);background:linear-gradient(135deg,rgba(122,125,255,.15),rgba(255,122,217,.12))}
+    .project{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
+    .project .thumb{border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-ring);background:var(--panel);box-shadow:var(--shadow)}
+    .thumb img{width:100%;display:block}
+    .tag{color:#c39bff;font-weight:800;margin-bottom:6px;letter-spacing:.06em}
+    .project h3{margin:4px 0 8px;letter-spacing:-.01em}.project p{color:var(--muted)}
+    .visit{display:inline-block;margin-top:8px;font-weight:800;color:var(--muted)}
+    footer{padding:40px 0;color:var(--muted)}
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    /* Experience/Education layout */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .xp-item{margin:10px 0 16px}
+    .xp-item h4{margin:0 0 6px}
+    .xp-item .where{color:var(--muted);font-weight:600}
+    .xp-item ul{margin:8px 0 0 18px}
+    @media (max-width:980px){
+      .hero,.project,.split,.skills-grid,.two-col{grid-template-columns:1fr}
+      .hero h1{font-size:40px}
     }
   </style>
 </head>
 <body>
+  <div class="bg-radial" aria-hidden="true"></div>
+
   <header>
-    <h1>My Projects</h1>
-  </header>
-  <main>
-    <div class="projects">
-      <!-- Project 1 -->
-      <div class="project">
-        <img src="assets/scotland-yard-banner.jpg" alt="Scotland Yard Game screenshot">
-        <div class="project-content">
-          <h2>Scotland Yard Game</h2>
-          <p>JavaFX board game engine featuring AI, travel log, and full Scotland Yard ruleset.</p>
-          <a href="https://github.com/HY-IA/ScotlandYard" target="_blank">View on GitHub</a>
-        </div>
+    <div class="container nav-row">
+      <div class="brand"><span class="dot">HY</span> Hiromichi Yano</div>
+      <nav>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a>
+      </nav>
+      <div class="social">
+        <a href="https://github.com/HY-IA" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
-      <!-- Project 2 -->
-      <div class="project">
-        <img src="assets/distributed-gol-banner.jpg" alt="Distributed Game of Life screenshot">
-        <div class="project-content">
-          <h2>Distributed Game of Life</h2>
-          <p>Parallel and distributed implementation of Conway's Game of Life in Go with SDL UI.</p>
-          <a href="https://github.com/HY-IA/CSA-CW-Distributed" target="_blank">View on GitHub</a>
-        </div>
-      </div>
-      <!-- Add more projects similarly -->
+      <button class="toggle" id="themeToggle" aria-label="Toggle theme">☀︎ / ☾</button>
     </div>
-  </main>
-  <footer>
-    &copy; 2025 Hiromichi Yano
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="container hero">
+    <div>
+      <div class="eyebrow">Software • Web • ML</div>
+      <h1>Building clean web apps. Exploring machine learning.</h1>
+      <p>
+        I’m Hiromichi Yano — a software engineer who enjoys crafting reliable, elegant systems.
+        I design back-ends and web applications, work with data, and apply ML when it makes products
+        faster and smarter. Green-card holder, open to U.S. roles.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">Contact</a>
+      </div>
+    </div>
+    <div class="hero-card" id="tilt">
+      <img src="img/profile-picture.png" alt="Portrait of Hiromichi Yano"><span class="initials">HY</span>
+    </div>
+  </section>
+
+  <!-- ABOUT + SKILLS -->
+  <section id="about" class="container">
+    <h2 class="section-title">About</h2>
+    <p class="subtle">Quick intro & what I work with.</p>
+
+    <div class="split">
+      <article class="cardish reveal">
+        <p>
+          I’m a software engineer (BSc, University of Bristol) who ships reliable systems and learns fast.
+          I’ve worked as a Machine Learning Engineer at Reazon (Tokyo) and as a Software Engineer at the University of Bristol,
+          delivering production-grade APIs, data pipelines, and ML models. I’m also deeply interested in
+          <strong>web application development</strong> and product-focused engineering.
+        </p>
+        <ul style="margin:12px 0 0 18px; padding:0; color:var(--ink); opacity:.92">
+          <li style="margin:8px 0;">Strong CS & math foundation; comfortable across <b>Go</b>, <b>Java</b>, and <b>Python</b>.</li>
+          <li style="margin:8px 0;">Hands-on with distributed systems (<b>AWS/EC2</b>), real-time back-ends, and modern web stacks (<b>React</b>/<b>Node</b>/<b>Spring Boot</b>).</li>
+          <li style="margin:8px 0;">Very interested in practical ML — <b>CNN/LSTM</b>, transfer learning, <b>TensorFlow</b>.</li>
+        </ul>
+        <p style="margin-top:12px">I’m open to software/web/ML roles in the U.S. (no sponsorship required). Let’s build something useful.</p>
+      </article>
+
+      <aside class="cardish skills reveal">
+        <h4>Skills</h4>
+        <div class="skills-grid">
+          <div>
+            <div class="skills-group"><h5>Languages</h5>
+              <div class="chips">
+                <span class="chip">Go</span><span class="chip">Java</span><span class="chip">Python</span>
+                <span class="chip">C/C++</span><span class="chip">C#</span><span class="chip">JavaScript</span>
+                <span class="chip">HTML/CSS</span><span class="chip">Haskell</span>
+              </div>
+            </div>
+            <div class="skills-group"><h5>Databases</h5>
+              <div class="chips">
+                <span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">BigQuery</span><span class="chip">Firebase</span>
+              </div>
+            </div>
+            <div class="skills-group"><h5>Frameworks / Tools</h5>
+              <div class="chips">
+                <span class="chip">Spring Boot</span><span class="chip">React.js</span><span class="chip">Node.js</span>
+                <span class="chip">.NET</span><span class="chip">ASP.NET</span><span class="chip">Flask</span>
+                <span class="chip">Express.js</span><span class="chip">Maven</span><span class="chip">MVC</span>
+                <span class="chip">Django</span><span class="chip">Figma</span><span class="chip">Docker</span>
+                <span class="chip">Kubernetes</span><span class="chip">Kafka</span><span class="chip">Terraform</span>
+                <span class="chip">NumPy</span><span class="chip">Seaborn</span><span class="chip">Scikit-learn</span>
+                <span class="chip">JSON</span><span class="chip">LLM</span><span class="chip">Jupyter</span>
+                <span class="chip">TensorFlow</span><span class="chip">CNN</span><span class="chip">LSTM</span>
+                <span class="chip">Keras</span><span class="chip">Transfer Learning</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="skills-group"><h5>Cloud / Networking</h5>
+              <div class="chips">
+                <span class="chip">AWS</span><span class="chip">EC2</span><span class="chip">TCP/UDP</span>
+                <span class="chip">HTTP/HTTPS</span><span class="chip">IPSec</span><span class="chip">Cisco</span>
+                <span class="chip">Google Workplace</span><span class="chip">Windows Server</span>
+                <span class="chip">Linux/Unix</span><span class="chip">Wireshark</span>
+              </div>
+            </div>
+            <div class="skills-group"><h5>Areas & Practices</h5>
+              <div class="chips">
+                <span class="chip">Deep Learning</span><span class="chip">Machine Learning</span>
+                <span class="chip">Computer Graphics</span><span class="chip">RESTful API</span>
+                <span class="chip">System Integration</span><span class="chip">Client-Server Models</span>
+                <span class="chip">Parallel Computing</span>
+                <span class="chip">ETL</span><span class="chip">Data Analysis</span><span class="chip">Data Science</span>
+                <span class="chip">DS&A</span><span class="chip">Discrete Math</span>
+                <span class="chip">Business Analytics</span><span class="chip">QA</span>
+                <span class="chip">Photoshop/Illustrator</span><span class="chip">Agile</span>
+                <span class="chip">Vim</span><span class="chip">Kanban</span><span class="chip">CI/CD (GitHub Actions)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- EXPERIENCE & EDUCATION -->
+    <div class="two-col" style="margin-top:22px">
+      <section class="cardish reveal">
+        <h3 style="margin-top:0">Experience</h3>
+
+        <div class="xp-item">
+          <h4>Machine Learning Engineer</h4>
+          <div class="where">Reazon Holdings — Tokyo, Japan · June 2024 – February 2025</div>
+          <ul>
+            <li>Analyzed large volumes of delivery data, incorporating features such as order volume, weather conditions, and regional traffic patterns to identify the root causes of service delays and implement ML algorithms that improved on-time performance.</li>
+            <li>Built robust data pipelines to clean and normalize inputs, trained and evaluated predictive models to estimate delivery times for each service area, and delivered region-specific estimates that aligned operational planning with real-world conditions, improving logistics efficiency and customer satisfaction.</li>
+          </ul>
+        </div>
+
+        <div class="xp-item">
+          <h4>Software Engineer</h4>
+          <div class="where">University of Bristol — Bristol, UK · September 2022 – June 2023</div>
+          <ul>
+            <li>Built RESTful APIs in Java (Spring Boot) for authentication, messaging, and presence updates; implemented WebSocket endpoints for low-latency communication; and designed MySQL schemas for scalable, persistent message storage.</li>
+            <li>Set up CI/CD pipelines with GitHub Actions and Dockerized microservices, collaborated with front-end teams on API contracts, and led cross-team code reviews, delivering a robust real-time chat platform.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cardish reveal">
+        <h3 style="margin-top:0">Education</h3>
+        <p><strong>BSc Computer Science</strong> — University of Bristol, UK (2020–2024)</p>
+        <p class="subtle" style="margin-top:10px">Teaching Assistant: Cyber Security & Computer Architecture · Language Volunteer: Taught Japanese to university students.</p>
+      </section>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="subtle">Selected work & research. (Logos: Reazon + Bristol crest.)</p>
+
+    <!-- A) REAZON HOLDINGS — FEATURED FIRST -->
+    <article class="cardish project reveal" style="margin-top:12px">
+      <div class="thumb">
+        <img src="img/reazon.png" alt="Reazon Holdings logo">
+      </div>
+      <div>
+        <div class="tag">Featured Experience</div>
+        <h3>Machine Learning Engineer — Delivery Prediction & Logistics Optimization</h3>
+        <p>
+          Analyzed delivery data (order volume, weather, regional traffic) to uncover delay drivers and implemented ML that improved on-time performance.
+          Built cleaning/normalization pipelines and trained/evaluated predictive models to estimate delivery times per service area, providing
+          region-specific ETAs that aligned operations with real-world conditions and improved logistics efficiency.
+        </p>
+        <span class="visit">Private work (NDA)</span>
+      </div>
+    </article>
+
+    <!-- B) NILM — SECOND -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb">
+        <img src="img/bristol.png" alt="University of Bristol crest">
+      </div>
+      <div>
+        <div class="tag">Featured Project</div>
+        <h3>Non-Intrusive Load Monitoring (NILM) — Deep Learning</h3>
+        <p>
+          CNN and LSTM on REDD to forecast household usage and disaggregate appliances. Optimized preprocessing
+          pushed fridge accuracy near 100%; transfer learning improved microwave/dishwasher detection while
+          cutting training time.
+        </p>
+        <a class="visit" href="https://drive.google.com/file/d/1QuBCNCQTE9TYPNKwLwEHWsbu6zsGVU3X/view?usp=sharing" target="_blank" rel="noopener">View Dissertation</a>
+      </div>
+    </article>
+
+    <!-- C) REAL-TIME MESSAGING WEB APP (UoB) -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Real-time Messaging Web Application — Backend & DB Architecture</h3>
+        <p>
+          Built Java/Spring Boot REST APIs for auth, messaging, and presence; added WebSocket endpoints for low-latency comms; and designed MySQL schemas for persistent history.
+          Set up CI/CD with GitHub Actions and Dockerized microservices; collaborated on API contracts and led code reviews.
+        </p>
+        <span class="visit">Private work (NDA)</span>
+      </div>
+    </article>
+
+    <!-- D) Computer Graphics -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Computer Graphics — CPU 3D Renderer (C++)</h3>
+        <p>
+          From-scratch rasterizer with z-buffering, OBJ/MTL loading, lighting, shadows, ray tracing, and interactive camera; SDL2 for windowing and input.
+        </p>
+        <a class="visit" href="https://github.com/HY-IA/Computer-Graphic" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- E) Distributed System -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Concurrent & Distributed Game of Life (Go + AWS)</h3>
+        <p>Broker-managed workers on AWS EC2; live control, fault tolerance, and scalable partitioning.</p>
+        <a class="visit" href="https://github.com/HY-IA/Distributed-System-" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- F) Scotland Yard -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Scotland Yard — Java Rules Engine & JavaFX UI</h3>
+        <p>Full ruleset including single/double/secret moves, ferry routes, immutable state, and plugin AI interface.</p>
+        <a class="visit" href="https://github.com/HY-IA/Scotland-Yard" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- G) Doubly Linked List -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Doubly Linked List — Data Structure Implementation</h3>
+        <p>Classic list with insert/delete/iterate operations and tests; used as a building block for other coursework.</p>
+        <a class="visit" href="https://github.com/HY-IA/Doubly-linked-list-" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- H) Sketch -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Sketch — Small Utilities & Experiments</h3>
+        <p>A sandbox repo for trying ideas quickly: small tools, UI sketches, and notes.</p>
+        <a class="visit" href="https://github.com/HY-IA/Sketch-" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+  </section>
+
+  <footer class="container">
+    © <span id="y"></span> Hiromichi Yano — <a href="https://github.com/HY-IA" target="_blank" rel="noopener">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">LinkedIn</a>
   </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+
+    // Theme toggle
+    const toggle=document.getElementById('themeToggle');
+    const applyTheme=t=>document.documentElement.setAttribute('data-theme',t);
+    const saved=localStorage.getItem('theme')||'dark'; applyTheme(saved);
+    toggle.addEventListener('click',()=>{const next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';applyTheme(next);localStorage.setItem('theme',next);});
+
+    // 3D tilt
+    const tilt=document.getElementById('tilt');
+    tilt.addEventListener('mousemove',e=>{
+      const r=tilt.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+      tilt.style.transform=`perspective(1200px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
+    });
+    tilt.addEventListener('mouseleave',()=>tilt.style.transform='perspective(1200px) rotateX(0) rotateY(0)');
+
+    // Reveal on scroll
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
