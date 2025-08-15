@@ -22,10 +22,14 @@
     html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
     a{color:inherit;text-decoration:none}
     .container{max-width:1160px;margin:0 auto;padding:24px}
+
+    /* Background glow */
     .bg-radial{position:fixed;inset:-20vh -10vw auto auto;z-index:-1;width:65vw;height:65vw;border-radius:50%;
       background:radial-gradient(circle at 30% 40%, rgba(122,125,255,.32), transparent 55%),
                  radial-gradient(circle at 75% 60%, rgba(255,122,217,.26), transparent 60%);
       filter:blur(40px);opacity:.55;pointer-events:none;}
+
+    /* Header / nav */
     header{position:sticky;top:0;z-index:6;background:rgba(15,17,22,.55);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--card-ring)}
     [data-theme="light"] header{background:rgba(255,255,255,.75)}
     .nav-row{display:flex;align-items:center;gap:18px}
@@ -40,6 +44,8 @@
     .social{display:flex;gap:12px;margin-left:8px}.social a{opacity:.9}.social a:hover{opacity:1}
     .toggle{margin-left:8px;border:1px solid var(--card-ring);background:var(--panel);color:inherit;
       padding:8px 10px;border-radius:12px;font-weight:700;cursor:pointer}
+
+    /* Hero */
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;padding-top:34px;padding-bottom:8px}
     .eyebrow{font-weight:800;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-size:12px}
     .hero h1{font-size:58px;line-height:1.05;letter-spacing:-.02em;margin:6px 0 16px}
@@ -55,6 +61,8 @@
     .hero-card img{width:100%;height:100%;object-fit:cover;object-position:center 36%}
     .initials{position:absolute;top:10px;left:10px;width:36px;height:36px;border-radius:50%;background:#0f1116;color:#fff;
       display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.06em;opacity:.85}
+
+    /* Sections / cards */
     .section-title{font-size:42px;letter-spacing:-.02em;margin:22px 0 4px}
     .subtle{color:var(--muted)}
     .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -67,21 +75,33 @@
     .chip{background:var(--chip);padding:8px 12px;border-radius:999px;font-weight:700;font-size:12.5px;border:1px solid var(--card-ring);
       transition:transform .12s ease, background .2s ease}
     .chip:hover{transform:translateY(-1px);background:linear-gradient(135deg,rgba(122,125,255,.15),rgba(255,122,217,.12))}
+
+    /* Timeline (Experience / Education) */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .timeline{position:relative;padding-left:20px}
+    .timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--card-ring)}
+    .t-item{position:relative;margin:12px 0;padding:14px 14px 14px 16px;border:1px solid var(--card-ring);border-radius:14px;background:var(--panel);box-shadow:var(--shadow)}
+    .t-item::before{content:"";position:absolute;left:-5px;top:20px;width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(122,125,255,.15)}
+    .t-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .badge{font-weight:800;font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(122,125,255,.15);border:1px solid var(--card-ring)}
+    .where{color:var(--muted);font-weight:600}
+    .t-item ul{margin:10px 0 0 18px}
+    .t-item:hover{transform:translateY(-1px);transition:transform .12s ease, box-shadow .2s ease;box-shadow:0 18px 38px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.04)}
+
+    /* Projects */
     .project{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
     .project .thumb{border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-ring);background:var(--panel);box-shadow:var(--shadow)}
     .thumb img{width:100%;display:block}
     .tag{color:#c39bff;font-weight:800;margin-bottom:6px;letter-spacing:.06em}
-    .project h3{margin:4px 0 8px;letter-spacing:-.01em}.project p{color:var(--muted)}
+    .project h3{margin:4px 0 8px;letter-spacing:-.01em}
+    .project p{color:var(--muted)}
     .visit{display:inline-block;margin-top:8px;font-weight:800;color:var(--muted)}
+
     footer{padding:40px 0;color:var(--muted)}
     .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
     .reveal.show{opacity:1;transform:translateY(0)}
-    /* Experience/Education layout */
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .xp-item{margin:10px 0 16px}
-    .xp-item h4{margin:0 0 6px}
-    .xp-item .where{color:var(--muted);font-weight:600}
-    .xp-item ul{margin:8px 0 0 18px}
+
     @media (max-width:980px){
       .hero,.project,.split,.skills-grid,.two-col{grid-template-columns:1fr}
       .hero h1{font-size:40px}
@@ -203,34 +223,49 @@
       </aside>
     </div>
 
-    <!-- EXPERIENCE & EDUCATION -->
+    <!-- EXPERIENCE & EDUCATION (stylish timeline to fill space nicely) -->
     <div class="two-col" style="margin-top:22px">
       <section class="cardish reveal">
-        <h3 style="margin-top:0">Experience</h3>
+        <h3 style="margin:0 0 6px">Experience</h3>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-head">
+              <span class="badge">Machine Learning Engineer</span>
+              <span class="where">Reazon Holdings — Tokyo, Japan · Jun 2024 – Feb 2025</span>
+            </div>
+            <ul>
+              <li>Analyzed large volumes of delivery data (order volume, weather, regional traffic) to identify delay drivers and implement ML that improved on-time performance.</li>
+              <li>Built robust pipelines to clean/normalize inputs; trained and evaluated models to estimate delivery times per service area; shipped region-specific estimates that aligned operations with real-world conditions and improved logistics efficiency.</li>
+            </ul>
+          </div>
 
-        <div class="xp-item">
-          <h4>Machine Learning Engineer</h4>
-          <div class="where">Reazon Holdings — Tokyo, Japan · June 2024 – February 2025</div>
-          <ul>
-            <li>Analyzed large volumes of delivery data, incorporating features such as order volume, weather conditions, and regional traffic patterns to identify the root causes of service delays and implement ML algorithms that improved on-time performance.</li>
-            <li>Built robust data pipelines to clean and normalize inputs, trained and evaluated predictive models to estimate delivery times for each service area, and delivered region-specific estimates that aligned operational planning with real-world conditions, improving logistics efficiency and customer satisfaction.</li>
-          </ul>
-        </div>
-
-        <div class="xp-item">
-          <h4>Software Engineer</h4>
-          <div class="where">University of Bristol — Bristol, UK · September 2022 – June 2023</div>
-          <ul>
-            <li>Built RESTful APIs in Java (Spring Boot) for authentication, messaging, and presence updates; implemented WebSocket endpoints for low-latency communication; and designed MySQL schemas for scalable, persistent message storage.</li>
-            <li>Set up CI/CD pipelines with GitHub Actions and Dockerized microservices, collaborated with front-end teams on API contracts, and led cross-team code reviews, delivering a robust real-time chat platform.</li>
-          </ul>
+          <div class="t-item">
+            <div class="t-head">
+              <span class="badge">Software Engineer</span>
+              <span class="where">University of Bristol — Bristol, UK · Sep 2022 – Jun 2023</span>
+            </div>
+            <ul>
+              <li>Built REST APIs in Java (Spring Boot) for auth, messaging, and presence; implemented WebSocket endpoints for low-latency communication; designed MySQL schemas for persistent message history.</li>
+              <li>Set up CI/CD with GitHub Actions and Dockerized microservices; collaborated on API contracts; led code reviews and delivered a robust real-time chat platform.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section class="cardish reveal">
-        <h3 style="margin-top:0">Education</h3>
-        <p><strong>BSc Computer Science</strong> — University of Bristol, UK (2020–2024)</p>
-        <p class="subtle" style="margin-top:10px">Teaching Assistant: Cyber Security & Computer Architecture · Language Volunteer: Taught Japanese to university students.</p>
+        <h3 style="margin:0 0 6px">Education</h3>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-head">
+              <span class="badge">BSc Computer Science</span>
+              <span class="where">University of Bristol, UK · 2020–2024</span>
+            </div>
+            <ul>
+              <li>Teaching Assistant: Cyber Security & Computer Architecture.</li>
+              <li>Language Volunteer: taught Japanese to university students.</li>
+            </ul>
+          </div>
+        </div>
       </section>
     </div>
   </section>
@@ -294,9 +329,7 @@
       <div>
         <div class="tag">Project</div>
         <h3>Computer Graphics — CPU 3D Renderer (C++)</h3>
-        <p>
-          From-scratch rasterizer with z-buffering, OBJ/MTL loading, lighting, shadows, ray tracing, and interactive camera; SDL2 for windowing and input.
-        </p>
+        <p>From-scratch rasterizer with z-buffering, OBJ/MTL loading, lighting, shadows, ray tracing, and interactive camera; SDL2 for windowing and input.</p>
         <a class="visit" href="https://github.com/HY-IA/Computer-Graphic" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </article>
