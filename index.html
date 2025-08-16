@@ -15,8 +15,8 @@
       --radius:18px; --radius-lg:24px;
     }
     [data-theme="light"]{
-      --bg:#f7f8fc; --panel:#fff; --soft:#eff1f7; --ink:#0f1116; --muted:#5e6475; --chip:#eef0f6;
-      --card-ring:rgba(16,17,22,.08); --shadow:0 16px 36px rgba(16,17,22,.10);
+      --bg:#f7f8fc; --panel:#fff; --soft:#eff1f7; --ink:#0f1116; --muted:#5e6475;
+      --chip:#eef0f6; --card-ring:rgba(16,17,22,.08); --shadow:0 16px 36px rgba(16,17,22,.10);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -39,7 +39,8 @@
     nav{margin-left:auto;display:flex;gap:18px;font-weight:700}
     nav a{position:relative;padding:10px 6px;border-radius:10px}
     nav a::after{content:"";position:absolute;left:10px;right:10px;bottom:6px;height:2px;
-      background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:0 50%;transition:transform .28s ease}
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);
+      transform-origin:0 50%;transition:transform .28s ease}
     nav a:hover::after{transform:scaleX(1)}
     .social{display:flex;gap:12px;margin-left:8px}.social a{opacity:.9}.social a:hover{opacity:1}
     .toggle{margin-left:8px;border:1px solid var(--card-ring);background:var(--panel);color:inherit;
@@ -52,12 +53,13 @@
     .hero p{color:var(--muted);font-size:18px;margin:0 0 18px}
     .cta{display:flex;gap:12px;flex-wrap:wrap}
     .btn{display:inline-block;padding:12px 16px;border-radius:14px;font-weight:800;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;border:0;transform:translateY(0);
-      box-shadow:0 10px 24px rgba(122,125,255,.25);transition:transform .15s ease, box-shadow .2s ease, filter .2s ease}
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;border:0;
+      transform:translateY(0); box-shadow:0 10px 24px rgba(122,125,255,.25);
+      transition:transform .15s ease, box-shadow .2s ease, filter .2s ease}
     .btn:hover{transform:translateY(-1px);filter:saturate(1.1);box-shadow:0 16px 26px rgba(122,125,255,.35)}
     .btn.secondary{background:transparent;color:var(--ink);border:1.8px solid var(--card-ring);box-shadow:none}
-    .hero-card{position:relative;border-radius:var(--radius-lg);background:var(--panel);overflow:hidden;border:1px solid var(--card-ring);
-      box-shadow:var(--shadow);aspect-ratio:4/3;transition:transform .12s ease-out}
+    .hero-card{position:relative;border-radius:var(--radius-lg);background:var(--panel);overflow:hidden;
+      border:1px solid var(--card-ring); box-shadow:var(--shadow);aspect-ratio:4/3;transition:transform .12s ease-out; will-change:transform;}
     .hero-card img{width:100%;height:100%;object-fit:cover;object-position:center 36%}
     .initials{position:absolute;top:10px;left:10px;width:36px;height:36px;border-radius:50%;background:#0f1116;color:#fff;
       display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.06em;opacity:.85}
@@ -72,50 +74,24 @@
     .cardish p{line-height:1.68}
     .skills h4{margin:0 0 8px}.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .skills-group{margin:10px 0 6px}.skills-group h5{margin:0 0 6px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
-    .chips{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{background:var(--chip);padding:8px 12px;border-radius:999px;font-weight:700;font-size:12.5px;border:1px solid var(--card-ring);
-      transition:transform .12s ease, background .2s ease}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}.chip{background:var(--chip);padding:8px 12px;border-radius:999px;font-weight:700;font-size:12.5px;border:1px solid var(--card-ring); transition:transform .12s ease, background .2s ease}
     .chip:hover{transform:translateY(-1px);background:linear-gradient(135deg,rgba(122,125,255,.15),rgba(255,122,217,.12))}
 
     /* Timeline (Experience / Education) */
     .timeline{position:relative;padding-left:20px}
     .timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--card-ring)}
     .t-item{position:relative;margin:12px 0;padding:14px 14px 14px 16px;border:1px solid var(--card-ring);border-radius:14px;background:var(--panel);box-shadow:var(--shadow)}
-    .t-item::before{content:"";position:absolute;left:-5px;top:20px;width:10px;height:10px;border-radius:50%;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(122,125,255,.15)}
+    .t-item::before{content:"";position:absolute;left:-5px;top:20px;width:10px;height:10px;border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(122,125,255,.15)}
     .t-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
     .badge{font-weight:800;font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(122,125,255,.15);border:1px solid var(--card-ring)}
     .where{color:var(--muted);font-weight:600}
     .t-item ul{margin:10px 0 0 18px}
     .t-item:hover{transform:translateY(-1px);transition:transform .12s ease, box-shadow .2s ease;box-shadow:0 18px 38px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.04)}
 
-    /* Projects - improved consistent thumbnails */
+    /* Projects */
     .project{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
-    .project .thumb{
-      border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-ring);background:var(--panel);box-shadow:var(--shadow);
-      /* ensure consistent preview area for logos */
-      padding:18px;
-      /* wide preview area so horizontal logos render well without stretching */
-      aspect-ratio: 4 / 1;
-      min-height:96px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background-color:rgba(255,255,255,0.03);
-    }
-    /* ensure images keep aspect ratio and are centered, not stretched */
-    .thumb img{
-      display:block;
-      max-width:100%;
-      max-height:100%;
-      width:100%;
-      height:100%;
-      object-fit:contain; /* preserve logo aspect ratio */
-      object-position:center;
-      border-radius:12px; /* rounded inner panel look for logos */
-      background:transparent;
-    }
-
+    .project .thumb{border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-ring);background:var(--panel);box-shadow:var(--shadow)}
+    .thumb img{width:100%;display:block}
     .tag{color:#c39bff;font-weight:800;margin-bottom:6px;letter-spacing:.06em}
     .project h3{margin:4px 0 8px;letter-spacing:-.01em}
     .project p{color:var(--muted)}
@@ -128,7 +104,6 @@
     @media (max-width:980px){
       .hero,.project,.split,.skills-grid{grid-template-columns:1fr}
       .hero h1{font-size:40px}
-      .project .thumb{aspect-ratio: 16 / 9; min-height:120px}
     }
   </style>
 </head>
@@ -138,13 +113,18 @@
   <header>
     <div class="container nav-row">
       <div class="brand"><span class="dot">HY</span> Hiromichi Yano</div>
-      <nav>
-        <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a>
+
+      <nav aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
       </nav>
-      <div class="social">
-        <a href="https://github.com/HY-IA" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">LinkedIn</a>
+
+      <div class="social" aria-hidden="false">
+        <a href="https://github.com/HY-IA" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
+
       <button class="toggle" id="themeToggle" aria-label="Toggle theme">☀︎ / ☾</button>
     </div>
   </header>
@@ -156,16 +136,19 @@
       <h1>Building clean web apps. Exploring machine learning.</h1>
       <p>
         I’m Hiromichi Yano — a software engineer who enjoys crafting reliable, elegant systems.
-        I design back-ends and web applications, work with data, and apply ML when it makes products
-        faster and smarter. Green-card holder, open to U.S. roles.
+        I design back-ends and web applications, work with data, and apply ML when it makes products faster and smarter.
+        Green-card holder, open to U.S. roles.
       </p>
+
       <div class="cta">
         <a class="btn" href="#projects">View Projects</a>
-        <a class="btn secondary" href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">Contact</a>
+        <a class="btn secondary" href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener noreferrer">Contact</a>
       </div>
     </div>
-    <div class="hero-card" id="tilt">
-      <img src="img/profile-picture.png" alt="Portrait of Hiromichi Yano"><span class="initials">HY</span>
+
+    <div class="hero-card" id="tilt" role="img" aria-label="Portrait of Hiromichi Yano (decorative)">
+      <img src="img/profile-picture.png" alt="Portrait of Hiromichi Yano">
+      <span class="initials">HY</span>
     </div>
   </section>
 
@@ -181,20 +164,22 @@
           <p>
             I’m a software engineer (BSc, University of Bristol) who ships reliable systems and learns fast.
             I’ve worked as a Machine Learning Engineer at Reazon (Tokyo) and as a Software Engineer at the University of Bristol,
-            delivering production-grade APIs, data pipelines, and ML models. I’m also deeply interested in
-            <strong>web application development</strong> and product-focused engineering.
+            delivering production-grade APIs, data pipelines, and ML models. I’m also deeply interested in <strong>web application development</strong> and product-focused engineering.
           </p>
+
           <ul style="margin:12px 0 0 18px; padding:0; color:var(--ink); opacity:.92">
             <li style="margin:8px 0;">Strong CS & math foundation; comfortable across <b>Go</b>, <b>Java</b>, and <b>Python</b>.</li>
             <li style="margin:8px 0;">Hands-on with distributed systems (<b>AWS/EC2</b>), real-time back-ends, and modern web stacks (<b>React</b>/<b>Node</b>/<b>Spring Boot</b>).</li>
             <li style="margin:8px 0;">Very interested in practical ML — <b>CNN/LSTM</b>, transfer learning, <b>TensorFlow</b>.</li>
           </ul>
+
           <p style="margin-top:12px">I’m open to software/web/ML roles in the U.S. (no sponsorship required). Let’s build something useful.</p>
         </article>
 
         <!-- EXPERIENCE -->
         <section class="cardish reveal" id="experience">
           <h3 style="margin:0 0 6px">Experience</h3>
+
           <div class="timeline">
             <div class="t-item">
               <div class="t-head">
@@ -220,7 +205,7 @@
           </div>
         </section>
 
-        <!-- EDUCATION (FIXED: properly closed elements) -->
+        <!-- EDUCATION -->
         <section class="cardish reveal" id="education">
           <h3 style="margin:0 0 6px">Education</h3>
           <div class="timeline">
@@ -230,16 +215,17 @@
                 <span class="where">University of Bristol, UK · 2020–2024</span>
               </div>
               <ul>
-                <li>Graduated with dissertation on NILM (Non-Intrusive Load Monitoring).</li>
+                <li>Relevant coursework: algorithms, systems, machine learning, databases, computer graphics.</li>
               </ul>
-            </div> <!-- closed .t-item -->
-          </div> <!-- closed .timeline -->
+            </div>
+          </div>
         </section>
       </div>
 
       <!-- RIGHT COLUMN: skills -->
-      <aside class="cardish skills reveal">
-        <h4>Skills</h4>
+      <aside class="cardish skills reveal" aria-labelledby="skills-heading">
+        <h4 id="skills-heading">Skills</h4>
+
         <div class="skills-grid">
           <div>
             <div class="skills-group"><h5>Languages</h5>
@@ -249,11 +235,13 @@
                 <span class="chip">HTML/CSS</span><span class="chip">Haskell</span>
               </div>
             </div>
+
             <div class="skills-group"><h5>Databases</h5>
               <div class="chips">
                 <span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">BigQuery</span><span class="chip">Firebase</span>
               </div>
             </div>
+
             <div class="skills-group"><h5>Frameworks / Tools</h5>
               <div class="chips">
                 <span class="chip">Spring Boot</span><span class="chip">React.js</span><span class="chip">Node.js</span>
@@ -268,6 +256,7 @@
               </div>
             </div>
           </div>
+
           <div>
             <div class="skills-group"><h5>Cloud / Networking</h5>
               <div class="chips">
@@ -277,17 +266,17 @@
                 <span class="chip">Linux/Unix</span><span class="chip">Wireshark</span>
               </div>
             </div>
+
             <div class="skills-group"><h5>Areas & Practices</h5>
               <div class="chips">
                 <span class="chip">Deep Learning</span><span class="chip">Machine Learning</span>
                 <span class="chip">Computer Graphics</span><span class="chip">RESTful API</span>
                 <span class="chip">System Integration</span><span class="chip">Client-Server Models</span>
-                <span class="chip">Parallel Computing</span>
-                <span class="chip">ETL</span><span class="chip">Data Analysis</span><span class="chip">Data Science</span>
-                <span class="chip">DS&A</span><span class="chip">Discrete Math</span>
+                <span class="chip">Parallel Computing</span><span class="chip">ETL</span><span class="chip">Data Analysis</span>
+                <span class="chip">Data Science</span><span class="chip">DS&A</span><span class="chip">Discrete Math</span>
                 <span class="chip">Business Analytics</span><span class="chip">QA</span>
-                <span class="chip">Photoshop/Illustrator</span><span class="chip">Agile</span>
-                <span class="chip">Vim</span><span class="chip">Kanban</span><span class="chip">CI/CD (GitHub Actions)</span>
+                <span class="chip">Photoshop/Illustrator</span><span class="chip">Agile</span><span class="chip">Vim</span>
+                <span class="chip">Kanban</span><span class="chip">CI/CD (GitHub Actions)</span>
               </div>
             </div>
           </div>
@@ -304,18 +293,14 @@
     <!-- A) REAZON HOLDINGS — FEATURED FIRST -->
     <article class="cardish project reveal" style="margin-top:12px">
       <div class="thumb">
-        <!-- prefer SVG for crisp logos; example shows PNG but use srcset for retina -->
-        <img src="img/reazon.png"
-             srcset="img/reazon@2x.png 2x, img/reazon@3x.png 3x"
-             alt="Reazon Holdings logo" loading="lazy">
+        <img src="img/reazon.png" alt="Reazon Holdings logo">
       </div>
       <div>
         <div class="tag">Featured Experience</div>
         <h3>Machine Learning Engineer — Delivery Prediction & Logistics Optimization</h3>
         <p>
           Analyzed delivery data (order volume, weather, regional traffic) to uncover delay drivers and implemented ML that improved on-time performance.
-          Built cleaning/normalization pipelines and trained/evaluated predictive models to estimate delivery times per service area, providing
-          region-specific ETAs that aligned operations with real-world conditions and improved logistics efficiency.
+          Built cleaning/normalization pipelines and trained/evaluated predictive models to estimate delivery times per service area, providing region-specific ETAs that aligned operations with real-world conditions and improved logistics efficiency.
         </p>
         <span class="visit">Private work (NDA)</span>
       </div>
@@ -324,25 +309,21 @@
     <!-- B) NILM — SECOND -->
     <article class="cardish project reveal" style="margin-top:18px">
       <div class="thumb">
-        <img src="img/bristol.png"
-             srcset="img/bristol@2x.png 2x, img/bristol@3x.png 3x"
-             alt="University of Bristol crest" loading="lazy">
+        <img src="img/bristol.png" alt="University of Bristol crest">
       </div>
       <div>
         <div class="tag">Featured Project</div>
         <h3>Non-Intrusive Load Monitoring (NILM) — Deep Learning</h3>
         <p>
-          CNN and LSTM on REDD to forecast household usage and disaggregate appliances. Optimized preprocessing
-          pushed fridge accuracy near 100%; transfer learning improved microwave/dishwasher detection while
-          cutting training time.
+          CNN and LSTM on REDD to forecast household usage and disaggregate appliances. Optimized preprocessing pushed fridge accuracy near 100%; transfer learning improved microwave/dishwasher detection while cutting training time.
         </p>
-        <a class="visit" href="https://drive.google.com/file/d/1QuBCNCQTE9TYPNKwLwEHWsbu6zsGVU3X/view?usp=sharing" target="_blank" rel="noopener">View Dissertation</a>
+        <a class="visit" href="https://drive.google.com/file/d/1QuBCNCQTE9TYPNKwLwEHWsbu6zsGVU3X/view?usp=sharing" target="_blank" rel="noopener noreferrer">View Dissertation</a>
       </div>
     </article>
 
     <!-- C) REAL-TIME MESSAGING WEB APP (UoB) -->
     <article class="cardish project reveal" style="margin-top:18px">
-      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest" loading="lazy"></div>
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
       <div>
         <div class="tag">Project</div>
         <h3>Real-time Messaging Web Application — Backend & DB Architecture</h3>
@@ -354,62 +335,122 @@
       </div>
     </article>
 
-    <!-- C) POINTFO — RESEARCH PAPER (UoB) -->
+    <!-- D) Computer Graphics -->
     <article class="cardish project reveal" style="margin-top:18px">
-      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest" loading="lazy"></div>
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
       <div>
-        <div class="tag">Research Paper</div>
-        <h3>Pointfo: Pointing-Triggered Projection in Museums</h3>
-        <p>
-          Hands-free system using Leap Motion to trigger projections directly on artworks, reducing misinterpretation and boosting
-          engagement. Study found longer exhibit interaction, improved cognitive load, and higher curiosity/surprise.
-        </p>
-        <a class="visit" href="https://drive.google.com/file/d/1F3T03KxyeiF4hsnOcB7LiZ-ZxWC2LwSB/view?usp=sharing" target="_blank" rel="noopener" > 
-          View Paper
-        </a>
+        <div class="tag">Project</div>
+        <h3>Computer Graphics — CPU 3D Renderer (C++)</h3>
+        <p>From-scratch rasterizer with z-buffering, OBJ/MTL loading, lighting, shadows, ray tracing, and interactive camera; SDL2 for windowing and input.</p>
+        <a class="visit" href="https://github.com/HY-IA/Computer-Graphic" target="_blank" rel="noopener noreferrer">View on GitHub</a>
       </div>
     </article>
 
-    <!-- remaining projects (omitted for brevity - keep same pattern) -->
+    <!-- E) Distributed System -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Concurrent & Distributed Game of Life (Go + AWS)</h3>
+        <p>Broker-managed workers on AWS EC2; live control, fault tolerance, and scalable partitioning.</p>
+        <a class="visit" href="https://github.com/HY-IA/Distributed-System-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- F) Scotland Yard -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Scotland Yard — Java Rules Engine & JavaFX UI</h3>
+        <p>Full ruleset including single/double/secret moves, ferry routes, immutable state, and plugin AI interface.</p>
+        <a class="visit" href="https://github.com/HY-IA/Scotland-Yard" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- G) Doubly Linked List -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Doubly Linked List — Data Structure Implementation</h3>
+        <p>Classic list with insert/delete/iterate operations and tests; used as a building block for other coursework.</p>
+        <a class="visit" href="https://github.com/HY-IA/Doubly-linked-list-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </article>
+
+    <!-- H) Sketch -->
+    <article class="cardish project reveal" style="margin-top:18px">
+      <div class="thumb"><img src="img/bristol.png" alt="Bristol crest"></div>
+      <div>
+        <div class="tag">Project</div>
+        <h3>Sketch — Small Utilities & Experiments</h3>
+        <p>A sandbox repo for trying ideas quickly: small tools, UI sketches, and notes.</p>
+        <a class="visit" href="https://github.com/HY-IA/Sketch-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </article>
   </section>
 
   <footer class="container">
-    © <span id="y"></span> Hiromichi Yano — <a href="https://github.com/HY-IA" target="_blank" rel="noopener">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener">LinkedIn</a>
+    © <span id="y"></span> Hiromichi Yano — <a href="https://github.com/HY-IA" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/hiromichiy/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </footer>
 
   <script>
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Smooth scroll
+    // Smooth scroll for internal anchors
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href');
-        if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'}); }
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if (id && id.startsWith('#') && id.length > 1) {
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
       });
     });
 
     // Theme toggle
-    const toggle=document.getElementById('themeToggle');
-    const applyTheme=t=>document.documentElement.setAttribute('data-theme',t);
-    const saved=localStorage.getItem('theme')||'dark'; applyTheme(saved);
-    toggle.addEventListener('click',()=>{const next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';applyTheme(next);localStorage.setItem('theme',next);});
+    const toggle = document.getElementById('themeToggle');
+    const applyTheme = t => document.documentElement.setAttribute('data-theme', t);
+    const saved = localStorage.getItem('theme') || 'dark';
+    applyTheme(saved);
+    // Update toggle label to reflect current theme (optional)
+    const updateToggleLabel = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      toggle.textContent = theme === 'light' ? '☀︎ / ☾' : '☀︎ / ☾';
+    };
+    updateToggleLabel();
+    toggle.addEventListener('click', ()=>{
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
+      updateToggleLabel();
+    });
 
-    // 3D tilt
-    const tilt=document.getElementById('tilt');
-    if(tilt){
-      tilt.addEventListener('mousemove',e=>{
-        const r=tilt.getBoundingClientRect();
-        const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
-        tilt.style.transform=`perspective(1200px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
+    // 3D tilt (mouse)
+    (function(){
+      const tilt = document.getElementById('tilt');
+      if (!tilt) return;
+      tilt.addEventListener('mousemove', e=>{
+        const r = tilt.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        tilt.style.transform = `perspective(1200px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg)`;
       });
-      tilt.addEventListener('mouseleave',()=>tilt.style.transform='perspective(1200px) rotateX(0) rotateY(0)');
-    }
+      tilt.addEventListener('mouseleave', ()=> tilt.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)');
+      // small tilt on mouseenter to hint interactivity
+      tilt.addEventListener('mouseenter', ()=> tilt.style.transition = 'transform .12s ease-out');
+    })();
 
     // Reveal on scroll
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add('show');
+          io.unobserve(en.target);
+        }
+      });
     },{threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </script>
